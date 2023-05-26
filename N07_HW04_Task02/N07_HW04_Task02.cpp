@@ -1,6 +1,6 @@
 #include <iostream>
 #include <catch2/catch_test_macros.hpp>
-#include<catch2/catch_session.hpp>
+#include <catch2/catch_session.hpp>
 
 struct ListNode
 {
@@ -95,27 +95,41 @@ private:
     unsigned long m_size;
 };
 
-TEST_CASE("test list_empty", "[empty]") {
+TEST_CASE("test PushFront", "[first]") {
     List l;
-    CHECK(l.Empty() == true);
-    
+    l.PushFront(6);
+    REQUIRE(l.Size() != 0);
+    //CHECK(l.Size() != 0);
+}
+TEST_CASE("test PushFront", "[second]") {
+    List l;
+    l.PushBack(6);
+    CHECK(l.Size() != 0);
 }
 
-TEST_CASE("test list_size", "[size]") {
+
+
+TEST_CASE("test PopFront_on_empty", "[third]") {
     List l;
-    l.PushFront(6);
-    l.PushFront(7);
-    l.PushFront(5);
-    CHECK(l.Size() == 3);
-    
-}
-TEST_CASE("test list_clear", "[clear]") {
-    List l;
-    //List l;
-    l.PushFront(6);
-    l.PushFront(7);
-    l.PushFront(5);
     l.Clear();
+    int k = 0;
+    CHECK_THROWS(k = l.PopFront());
+}
+
+TEST_CASE("test PopBack_on_empty", "[fourth]") {
+    List l;
+    l.Clear();
+    int k = 0;
+    CHECK_THROWS(k = l.PopBack());
+}
+TEST_CASE("All_Test", "[fifth]") {
+    List l;
+    l.PushFront(6);
+    l.PushBack(1);
+    REQUIRE(l.Size() == 2);
+    l.PopFront();
+    REQUIRE(l.Size() == 1);
+    l.PopBack();
     CHECK(l.Size() == 0);
 }
 
